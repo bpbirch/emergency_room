@@ -13,7 +13,7 @@ import pandas as pd
 
 
 #%%
-class Queue():
+class Queue:
     
     def __init__(self):
         self.items = []
@@ -76,9 +76,8 @@ class Doctor:
         #it is determined by the patient's severity, and the doctor's sppm allowance
 
 #%%
-        
+import numpy as np     
 class Patient:
-      
     def __init__(self, time, mu, SD):
         self.severity = np.random.normal(mu, SD) #average patient will have severity of mu, dist will have SD = SD
         self.timestamp = time
@@ -164,7 +163,7 @@ def hospital_simulation(mins_to_sim, docs, sppm, avg_pat_ph, threshold_SD, mu, S
         current_minute = current_minute
         
         num_new_patients = round(np.random.normal(avg_pat_ph/60, 3)) #assuming SD of 3 - all of this would actually be data driven
-        for pat in range(num_new_patients):
+        for _ in range(num_new_patients):
             patient = Patient(current_minute, mu, SD)
             patient_queue.enqueue(patient)
                 #our threshold is defined as the severity above which our patient will definitely die, so 
@@ -225,8 +224,6 @@ def checking_in_patients(doc_dict, patient_queue, threshold_SD, mu, SD, wait_tim
     #max_line_length
     
     """
-    
-
     Parameters
     ----------
     doc_dict : Dict
@@ -263,7 +260,7 @@ def checking_in_patients(doc_dict, patient_queue, threshold_SD, mu, SD, wait_tim
     None.
 
     """
-    for key, doctor in doc_dict.items():
+    for _, doctor in doc_dict.items():
         if patient_queue.size() > 0:
             if mu - threshold_SD*SD <= patient_queue.peek().severity <= mu + threshold_SD*SD: 
                 #we use this approach to determine whether a patient is in the tails of our specified normal distrubtion
@@ -317,20 +314,22 @@ def checking_in_patients(doc_dict, patient_queue, threshold_SD, mu, SD, wait_tim
 
 #%%
 
-waits = hospital_simulation(mins_to_sim = 1440, docs = 2, sppm = 5, 
-                            avg_pat_ph = 30, sev_coef = .6, wait_coef = .2, 
-                            interact_coef = .2, threshold_SD = 2, mu = 10, SD = 3, max_line_length = 3)
+if __name__ == '__main__':
+    waits = hospital_simulation(mins_to_sim = 1440, docs = 2, sppm = 5, 
+                                avg_pat_ph = 30, sev_coef = .6, wait_coef = .2, 
+                                interact_coef = .2, threshold_SD = 2, mu = 10, SD = 3, max_line_length = 3)
 
 
-waits[1]
+    print(waits[1])
 
 
-waits = hospital_simulation(mins_to_sim = 1440, docs = 10, sppm = 5, avg_pat_ph = 30, 
-                            sev_coef = .6, wait_coef = .2, interact_coef = .2, 
-                            threshold_SD = 2, mu = 10, SD = 3, max_line_length = 3)
+    waits = hospital_simulation(mins_to_sim = 1440, docs = 10, sppm = 5, avg_pat_ph = 30, 
+                                sev_coef = .6, wait_coef = .2, interact_coef = .2, 
+                                threshold_SD = 2, mu = 10, SD = 3, max_line_length = 3)
 
 
-waits[1] #here we see that we actually get a big change in death rate by just increasing doctors
+    #waits[1] #here we see that we actually get a big change in death rate by just increasing doctors
+    print(waits[1])
 
 
 
