@@ -4,6 +4,10 @@
 Created on Thu May 21 10:41:28 2020
 
 @author: brendanbirch
+
+The purpose of this module is to simulate an emergency rooms, and to attempt a prediction of
+patient outcomes / patient deaths during a pandemic.
+
 """
 
 # EMERGENCY ROOM SIMULATION
@@ -75,8 +79,7 @@ class Doctor:
         #the amount of time a doctor spends with a patient is not constant
         #it is determined by the patient's severity, and the doctor's sppm allowance
 
-#%%
-import numpy as np     
+#%%  
 class Patient:
     def __init__(self, time, mu, SD):
         self.severity = np.random.normal(mu, SD) #average patient will have severity of mu, dist will have SD = SD
@@ -233,7 +236,7 @@ def checking_in_patients(doc_dict, patient_queue, threshold_SD, mu, SD, wait_tim
     threshold_SD : float or int
         This is the number of standard deviations from your specified mu of patient severity distribution 
         (using normal distribution ~N(mu, SD) that determines whether a patient gets seen immediately 
-         when they get to the end of the queue. If their severity is in one of the tails, meaning
+         when they get to the end of the queue. If their severity is between the tails, meaning
          mu - threshold_SD*SD < patient.severity < mu - threshold_SD*SD, then we see patient right away.
          But if patient severity is above or below those tail values, and our patient.queue.size() > max_line_length,
          then such patients get sent to the back of the queue.
@@ -328,7 +331,7 @@ if __name__ == '__main__':
                                 threshold_SD = 2, mu = 10, SD = 3, max_line_length = 3)
 
 
-    #waits[1] #here we see that we actually get a big change in death rate by just increasing doctors
+    #here we see that we actually get a big change in death rate by just increasing doctors
     print(waits[1])
 
 
