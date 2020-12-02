@@ -1,8 +1,7 @@
 # emergency_room
 The purpose when I wrote this module was to write a rough model that predicts wait times and deaths of patients, based on multiple parameters (eg number of doctors, time doctors are allowed to see each patient, patient severity)
 This module utilizes queues for patients, and patients are seen based on severity (documentation for module functions explains this more thoroughly).
-The functionality for this was written in a way that patients are only seen if their severity lies between the tails of our minimum and maximum severity,
-as patients at the less severe end of the distribution do not need to be seen right away, and patients in the more severe tail may be beyond saving.
+The functionality for this was written in a way that patients are only seen if their severity lies between the tails of our minimum and maximum severity thresholds, as patients at the less severe end of the distribution do not need to be seen right away, and patients in the more severe tail may be beyond saving.
 
 The two main functions of interest are checking_in_patients and hospital_simulation. Providing documentation below:
 
