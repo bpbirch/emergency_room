@@ -19,20 +19,15 @@ import pandas as pd
 #%%
 class Queue:  
     def __init__(self):
-        self.items = []
-    
+        self.items = []   
     def isEmpty(self):
         return self.items == []
-    
     def enqueue(self, item): #assumes left side of list is the back of the line
         self.items.insert(0, item)
-        
     def dequeue(self): #assumes right side of list is the front of the line
-        return self.items.pop()
-    
+        return self.items.pop()    
     def size(self):
-        return len(self.items)
-    
+        return len(self.items)    
     def peek(self):
         return self.items[len(self.items) - 1]
 
