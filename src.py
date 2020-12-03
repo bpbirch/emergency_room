@@ -32,7 +32,6 @@ class Queue:
         return self.items[len(self.items) - 1]
 
 #%%
-
 class Doctor:
     def __init__(self, sppm): 
         """
@@ -86,8 +85,7 @@ class Patient:
         return current_time - self.timestamp
 
 #%%
-### get rid of the coefficient parameters. instead, have it spit out a prediction for each patient, based on a model you made beforehand
-
+### thought for future improvement: get rid of the coefficient parameters. instead, have it spit out a prediction for each patient, based on a model you made beforehand
 def hospital_simulation(mins_to_sim, docs, sppm, avg_pat_ph, threshold_SD, mu, SD, max_line_length, sev_coef, wait_coef, interact_coef): 
     """
     Parameters
@@ -211,7 +209,6 @@ def hospital_simulation(mins_to_sim, docs, sppm, avg_pat_ph, threshold_SD, mu, S
 #and for each one of them, create a new patient
 
 #%%
-
 def checking_in_patients(doc_dict, patient_queue, threshold_SD, mu, SD, wait_time_severity, current_minute, max_line_length):
     """
     Parameters
@@ -303,12 +300,10 @@ def checking_in_patients(doc_dict, patient_queue, threshold_SD, mu, SD, wait_tim
             
 
 #%%
-
 if __name__ == '__main__':
     waits = hospital_simulation(mins_to_sim = 1440, docs = 2, sppm = 5, 
                                 avg_pat_ph = 30, sev_coef = .6, wait_coef = .2, 
                                 interact_coef = .2, threshold_SD = 2, mu = 10, SD = 3, max_line_length = 3)
-
     print('the output order in this tuple is: avg_sev, avg_wait, patients_seen, remaining_patients, total_patients, num_deaths, death_rate')
     print(waits[1])
     # note that if you want to access the list of [(wait_times, severities, deaths)]
@@ -317,7 +312,6 @@ if __name__ == '__main__':
     waits = hospital_simulation(mins_to_sim = 1440, docs = 10, sppm = 5, avg_pat_ph = 30, 
                                 sev_coef = .6, wait_coef = .2, interact_coef = .2, 
                                 threshold_SD = 2, mu = 10, SD = 3, max_line_length = 3)
-
     #here we see that we actually get a big change in death rate by just increasing doctors
     print(waits[1])
 
