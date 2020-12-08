@@ -1,4 +1,7 @@
 # emergency_room
+
+Note that data file was drawn from https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries/resource/3ce11e2c
+
 The purpose when I wrote this module was to write a rough model that predicts wait times and deaths of patients, based on multiple parameters (eg number of doctors, time doctors are allowed to see each patient, patient severity)
 This module utilizes queues for patients, and patients are seen based on severity (documentation for module functions explains this more thoroughly).
 The functionality for this was written in a way that patients are only seen if their severity lies between the tails of our minimum and maximum severity thresholds, as patients at the less severe end of the distribution do not need to be seen right away, and patients in the more severe tail may be beyond saving.
